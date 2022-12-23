@@ -3878,13 +3878,6 @@ SEXP Tsparse_as_CRsparse(SEXP from, SEXP Csparse)
 	++nprotect;
     }
     
-    /* FIXME? we would ideally only throw an error if the number
-       of _unique_ (i,j) pairs exceeds INT_MAX ... 
-    */
-    if (nnz0 > INT_MAX)
-	error(_("unable to coerce from TsparseMatrix to [CR]sparseMatrix"
-		"when length of 'i' slot exceeds 2^31-1"));
-    
     SEXP p1 = PROTECT(allocVector(INTSXP, (R_xlen_t) n_ + 1)), i1 = NULL;
     ++nprotect;
     int *pp1 = INTEGER(p1), *pi1, *pj_, *workA, *workB, *workC, i, j;
